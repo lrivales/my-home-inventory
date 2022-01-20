@@ -14,9 +14,12 @@ const resolvers = {
             return User.findOne({
                 $or: [{ _id }, { username }]
             });
-        }
+        },
 
         // query item by itemId
+        item: async (parent, { itemId }) => {
+            return User.items.itemId(itemId);
+        }
     },
 
     Mutation: {
@@ -30,7 +33,20 @@ const resolvers = {
         },
 
         // update user
+        updateUser: async (parent, { _id, ...args }) => {
+            const updatedUser = await User.findByIdAndUpdate(
+                { _id },
+                { ...args },
+                { new: true }
+            );
+            return updatedUser;
+        },
+
         // delete user
+        deleteUser: async (parent, { _id }) => {
+            const deletedUser = await User.findByIdAndDelete({ _id });
+            return deletedUser;
+        },
 
         // add item
         addItem: async (parent, { _id, content }) => {
