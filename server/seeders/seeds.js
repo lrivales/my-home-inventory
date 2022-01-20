@@ -1,5 +1,4 @@
 const faker = require('faker');
-const { Convert } = require('mongo-image-converter');
 
 const db = require('../config/connection');
 const { User } = require('../models/index');
