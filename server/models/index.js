@@ -26,9 +26,6 @@ const userSchema = new Schema(
                 description: {
                     type: String
                 },
-                purchaseDate: {
-                    type: Date
-                },
                 value: {
                     type: Number
                 },
