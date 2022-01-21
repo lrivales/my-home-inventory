@@ -17,6 +17,11 @@ const typeDefs = gql`
         items: [Item]
     }
 
+    type Auth {
+        token: ID!
+        user: User
+    }
+
     input itemData {
         name: String
         description: String
@@ -31,6 +36,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
+        login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): User
         updateUser(userId: ID!, username: String, email: String, password: String): User
         deleteUser(userId: ID!): User

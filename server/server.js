@@ -1,5 +1,6 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
+const { authMiddleware } = require('./utils/auth');
 const bodyParser = require('body-parser'); // required for mongo-image-converter
 
 const { typeDefs, resolvers } = require('./schemas');
@@ -11,7 +12,8 @@ const app = express();
 const startServer = async () => {
   const server = new ApolloServer({ 
     typeDefs, 
-    resolvers
+    resolvers,
+    context: authMiddleware
   });
 
   await server.start();
