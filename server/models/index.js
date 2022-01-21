@@ -1,4 +1,4 @@
-const { Schema, Types, model } = require('mongoose');
+const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const ItemSchema = new Schema(
@@ -43,12 +43,19 @@ const UserSchema = new Schema(
     }
 );
 
-// setup pre-middleware for encrypting passwords
-// does not work for password updates
+// encrypt password before saving new user
 UserSchema.pre('save', async function(next) {
-    if (this.isModified('password') || this.isNew) {
+    const saltRounds = 10;
+    this.password = await bcrypt.hash(this.password, saltRounds);
+
+    next();
+});
+
+// encrypt password before saving updated user
+UserSchema.pre('findOneAndUpdate', async function(next) {
+    if (this._update.password) {
         const saltRounds = 10;
-        this.password = await bcrypt.hash(this.password, saltRounds);
+        this._update.password = await bcrypt.hash(this._update.password, saltRounds);
     }
 
     next();
