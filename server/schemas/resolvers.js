@@ -60,10 +60,37 @@ const resolvers = {
                 { new: true }
             );
             return updatedUser;
-        }
+        },
 
         // update item
+        updateItem: async(parent, { userId, itemId, content }) => {
+            // insert updated item as new subdoc
+            await User.findByIdAndUpdate(
+                { _id: userId },
+                { $addToSet: { items: content } },
+                { new: true }
+            );
+
+            // delete old item
+            const user = await User.findById({ _id: userId });
+            user.items.id(itemId).remove();
+            user.save(function (err) {
+                if (err) return handleError(err);
+            });
+ 
+            return user;
+        },
+
         // delete item
+        deleteItem: async(parent, { userId, itemId }) => {
+            const user = await User.findById({ _id: userId });
+            user.items.id(itemId).remove();
+            user.save(function (err) {
+                if (err) return handleError(err);
+            });
+
+            return user;
+        }
     }
 };
 
