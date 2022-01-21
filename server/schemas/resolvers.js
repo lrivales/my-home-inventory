@@ -5,6 +5,14 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
     Query: {
         // me query
+        me: async (parent, args, context) => {
+            if (context.user) {
+                const user = await User.findOne({ _id: context.user._id });
+                return user;
+            }
+
+            throw new AuthenticationError('Not logged in.');
+        },
 
         // get all users
         users: async () => {
