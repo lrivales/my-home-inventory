@@ -1,20 +1,8 @@
 const { Schema, Types, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const TagSchema = new Schema(
-    {
-        tag: {
-            type: String
-        }
-    }
-);
-
 const ItemSchema = new Schema(
     {
-        itemId: {
-            type: Schema.Types.ObjectId,
-            default: () => new Types.ObjectId()
-        },
         name: {
             type: String
         },
@@ -26,8 +14,7 @@ const ItemSchema = new Schema(
         },
         image: {
             type: String
-        },
-        tags: [TagSchema]
+        }
     }
 );
 
@@ -57,6 +44,7 @@ const UserSchema = new Schema(
 );
 
 // setup pre-middleware for encrypting passwords
+// does not work for password updates
 UserSchema.pre('save', async function(next) {
     if (this.isModified('password') || this.isNew) {
         const saltRounds = 10;

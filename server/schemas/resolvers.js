@@ -10,15 +10,19 @@ const resolvers = {
         },
 
         // query user by _id or username
-        user: async (parent, { _id, username }) => {
+        user: async (parent, { userId, username }) => {
             return User.findOne({
-                $or: [{ _id }, { username }]
+                $or: [{ _id: userId }, { username: username }]
             });
         },
 
-        // query item by itemId
-        item: async (parent, { itemId }) => {
-            return User.items.itemId(itemId);
+        // query for item by itemId
+        item: async (parent, { userId, itemId }) => {
+            const user = await User.findOne({
+                _id: userId
+            });
+            const item = user.items.id(itemId)
+            return item;
         }
     },
 
@@ -33,9 +37,9 @@ const resolvers = {
         },
 
         // update user
-        updateUser: async (parent, { _id, ...args }) => {
+        updateUser: async (parent, { userId, ...args }) => {
             const updatedUser = await User.findByIdAndUpdate(
-                { _id },
+                { _id: userId },
                 { ...args },
                 { new: true }
             );
@@ -43,15 +47,15 @@ const resolvers = {
         },
 
         // delete user
-        deleteUser: async (parent, { _id }) => {
-            const deletedUser = await User.findByIdAndDelete({ _id });
+        deleteUser: async (parent, { userId }) => {
+            const deletedUser = await User.findByIdAndDelete({ _id: userId });
             return deletedUser;
         },
 
         // add item
-        addItem: async (parent, { _id, content }) => {
+        addItem: async (parent, { userId, content }) => {
             const updatedUser = await User.findByIdAndUpdate(
-                { _id },
+                { _id: userId },
                 { $addToSet: { items: content } },
                 { new: true }
             );
@@ -60,10 +64,6 @@ const resolvers = {
 
         // update item
         // delete item
-
-        // add tag
-        // update tag
-        // delete tag
     }
 };
 
