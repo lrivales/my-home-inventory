@@ -11,7 +11,7 @@ const resolvers = {
                 return user;
             }
 
-            throw new AuthenticationError('Not logged in.');
+            throw new AuthenticationError('Please log in.');
         },
 
         // get all users
@@ -27,12 +27,16 @@ const resolvers = {
         },
 
         // query for item by itemId
-        item: async (parent, { userId, itemId }) => {
-            const user = await User.findOne({
-                _id: userId
-            });
-            const item = user.items.id(itemId)
-            return item;
+        item: async (parent, { userId, itemId }, context) => {
+            if (context.user) {
+                const user = await User.findOne({
+                    _id: userId
+                });
+                const item = user.items.id(itemId)
+                return item;
+            }
+
+            throw new AuthenticationError('Please log in!');
         }
     },
 
@@ -61,63 +65,86 @@ const resolvers = {
                 { username, email, password }
             );
 
-            return user;
+            const token = signToken(user);
+
+            return { token, user };
         },
 
         // update user
-        updateUser: async (parent, { userId, ...args }) => {
-            const updatedUser = await User.findByIdAndUpdate(
-                { _id: userId },
-                { ...args },
-                { new: true }
-            );
-            return updatedUser;
+        updateUser: async (parent, { userId, ...args }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findByIdAndUpdate(
+                    { _id: userId },
+                    { ...args },
+                    { new: true }
+                );
+                return updatedUser;
+            }
+            
+            throw new AuthenticationError('Please log in!');
         },
 
         // delete user
-        deleteUser: async (parent, { userId }) => {
-            const deletedUser = await User.findByIdAndDelete({ _id: userId });
-            return deletedUser;
+        deleteUser: async (parent, { userId }, context) => {
+            if (context.user) {
+                const deletedUser = await User.findByIdAndDelete({ _id: userId });
+                return deletedUser;
+            }
+            
+            throw new AuthenticationError('Please log in!');
         },
 
         // add item
-        addItem: async (parent, { userId, content }) => {
-            const updatedUser = await User.findByIdAndUpdate(
-                { _id: userId },
-                { $addToSet: { items: content } },
-                { new: true }
-            );
-            return updatedUser;
+        addItem: async (parent, { userId, content }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findByIdAndUpdate(
+                    { _id: userId },
+                    { $addToSet: { items: content } },
+                    { new: true }
+                );
+                return updatedUser;
+            }
+            
+            throw new AuthenticationError('Please log in!');
         },
 
         // update item
-        updateItem: async(parent, { userId, itemId, content }) => {
-            // insert updated item as new subdoc
-            await User.findByIdAndUpdate(
-                { _id: userId },
-                { $addToSet: { items: content } },
-                { new: true }
-            );
+        updateItem: async(parent, { userId, itemId, content }, context) => {
+            if (context.user) {
+                // insert updated item as new subdoc
+                //  all fields need to be resent even with no changes
+                await User.findByIdAndUpdate(
+                    { _id: userId },
+                    { $addToSet: { items: content } },
+                    { new: true }
+                );
 
-            // delete old item
-            const user = await User.findById({ _id: userId });
-            user.items.id(itemId).remove();
-            user.save(function (err) {
-                if (err) return handleError(err);
-            });
+                // delete old item
+                const user = await User.findById({ _id: userId });
+                user.items.id(itemId).remove();
+                user.save(function (err) {
+                    if (err) return handleError(err);   
+                });
  
-            return user;
+                return user;
+            }
+
+            throw new AuthenticationError('Please log in!');
         },
 
         // delete item
-        deleteItem: async(parent, { userId, itemId }) => {
-            const user = await User.findById({ _id: userId });
-            user.items.id(itemId).remove();
-            user.save(function (err) {
-                if (err) return handleError(err);
-            });
+        deleteItem: async(parent, { userId, itemId }, context) => {
+            if (context.user) {
+                const user = await User.findById({ _id: userId });
+                user.items.id(itemId).remove();
+                user.save(function (err) {
+                    if (err) return handleError(err);
+                });
 
-            return user;
+                return user;
+            }
+            
+            throw new AuthenticationError('Please log in!');
         }
     }
 };
