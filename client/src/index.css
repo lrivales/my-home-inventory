@@ -1,8 +1,61 @@
+:root {
+  --primary: #000000;
+  --secondary: #14213D;
+  --tertiary: #FCA311;
+  --quaternary: #E5E5E5;
+  --quinary: #FFFFFF;
+}
+
+.text-custom {
+  color: var(--primary);
+}
+
+.text-title {
+  color: var(--quaternary);
+}
+
+.linear-gradient {
+  background-image: linear-gradient(var(--quinary), var(--quaternary), var(--tertiary));
+}
+
+.bg-color-primary {
+  background-color: var(--primary);
+}
+
+.bg-color-secondary {
+  background-color: var(--secondary);
+}
+
+.bg-color-tertiary {
+  background-color: var(--tertiary);
+}
+
+.bg-color-quaternary {
+  background-color: var(--quaternary);
+}
+
+.bg-color-quinary {
+  background-color: var(--quinary);
+}
+
+.bg-image-primary {
+  background-image: url('./assets/images/furniture.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.bg-image-secondary {
+  background-image: url('./assets/images/modern-home.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif; */
+  font-family: 'Sora', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -9,46 +9,24 @@ import {
   gql
 } from '@apollo/client';
 
+import Hero from './components/Hero';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+
 const client = new ApolloClient({
   uri: 'http://localhost:3001/graphql',
   cache: new InMemoryCache()
 });
 
-async function test() {
-  const result = await client.query({
-    query: gql`
-    query Users {
-      users {
-        _id
-        username
-        email
-      }
-    }`
-  });
-
-  console.log(result);
-};
-
-test();
-
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <ApolloProvider client={{client}}>
+      <div className="App">
+        {/* <Hero /> */}
+        <Navbar />
+        <Home />
     </div>
+    </ApolloProvider>
   );
 }
 
