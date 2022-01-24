@@ -19,7 +19,7 @@ mutation Login($email: String!, $password: String!) {
 }
 `;
 
-const ADD_USER = gql`
+export const ADD_USER = gql`
 mutation AddUser($username: String!, $email: String!, $password: String!) {
     addUser(username: $username, email: $email, password: $password) {
         token
@@ -38,7 +38,7 @@ mutation AddUser($username: String!, $email: String!, $password: String!) {
 }
 `;
 
-const UPDATE_USER = gql`
+export const UPDATE_USER = gql`
 mutation UpdateUser($userId: ID!, $username: String, $email: String, $password: String) {
     updateUser(userId: $userId, username: $username, email: $email, password: $password) {
         _id
@@ -48,7 +48,7 @@ mutation UpdateUser($userId: ID!, $username: String, $email: String, $password: 
 }
 `;
 
-const DELETE_USER = gql`
+export const DELETE_USER = gql`
 mutation DeleteUser($userId: ID!) {
     deleteUser(userId: $userId) {
         _id
@@ -58,7 +58,7 @@ mutation DeleteUser($userId: ID!) {
 }
 `;
 
-const ADD_ITEM = gql`
+export const ADD_ITEM = gql`
 mutation AddItem($userId: ID!, $content: itemData!) {
     addItem(userId: $userId, content: $content) {
         items {
@@ -71,7 +71,7 @@ mutation AddItem($userId: ID!, $content: itemData!) {
 }
 `;
 
-const UPDATE_ITEM = gql`
+export const UPDATE_ITEM = gql`
 mutation UpdateItem($userId: ID!, $itemId: ID!, $content: itemData!) {
     updateItem(userId: $userId, itemId: $itemId, content: $content) {
         items {
@@ -84,7 +84,7 @@ mutation UpdateItem($userId: ID!, $itemId: ID!, $content: itemData!) {
 }
 `;
 
-const DELETE_ITEM = gql`
+export const DELETE_ITEM = gql`
 mutation DeleteItem($userId: ID!, $itemId: ID!) {
     deleteItem(userId: $userId, itemId: $itemId) {
         items {

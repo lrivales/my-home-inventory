@@ -8,21 +8,20 @@ const Login = (props) => {
     const [loginFormState, setLoginFormState] = useState({ email: '', password: ''});
     const [login, loginStatus] = useMutation(LOGIN_USER);
 
-    // const [signupFormState, setSignUpFormState] = useState({ username: '', email: '', password: ''});
-    // const [signup, { error }] = useMutation(ADD_USER);
+    const [signupFormState, setSignUpFormState] = useState({ username: '', email: '', password: ''});
+    const [addUser, addUserStatus] = useMutation(ADD_USER);
 
     const handleLoginFormChange = (event) => {
         const { name, value } = event.target;
 
         setLoginFormState({
             ...loginFormState,
-            [name]: value,
+            [name]: value
         });
     };
 
     const handleLoginFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(loginFormState);
         
         try {
             const { data } = await login({
@@ -32,8 +31,8 @@ const Login = (props) => {
             console.log(data);
 
             Auth.login(data.login.token);
-          } catch (e) {
-            console.error(e);
+          } catch (err) {
+            console.error(err);
           }
       
           // clear form values
@@ -41,6 +40,29 @@ const Login = (props) => {
             email: '',
             password: '',
           });
+    };
+
+    const handleSignupFormChange = (event) => {
+        const { name, value } = event.target;
+
+        setSignUpFormState({
+            ...signupFormState,
+            [name]: value
+        });
+    };
+
+    const handleSignupFormSubmit = async (event) => {
+        event.preventDefault();
+        
+        try {
+            const { data } = await addUser({
+                variables: { ...signupFormState }
+            });
+
+            Auth.login(data.addUser.token);
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     return (
@@ -75,14 +97,18 @@ const Login = (props) => {
                 <div className="column">
                     {/* signup form */}
                     <h4>Sign Up</h4>
-                    <label className="form-label" htmlFor="email">Username:</label>
-                    <input className="form-input input-lg" type="text" id="signup-username" placeholder="Username"></input>
-                    <label className="form-label" htmlFor="email">Email:</label>
-                    <input className="form-input input-lg" type="text" id="signup-email" placeholder="Email"></input>
-                    <label className="form-label" htmlFor="password">Password:</label>
-                    <input className="form-input input-lg" type="text" id="signup-password" placeholder="Password"></input>
+                    <form onSubmit={handleSignupFormSubmit}>
+                        <label className="form-label" htmlFor="email">Username:</label>
+                        <input className="form-input input-lg" name="username" type="username" id="signup-username" value={signupFormState.username} placeholder="Username" onChange={handleSignupFormChange}></input>
+                        <label className="form-label" htmlFor="email">Email:</label>
+                        <input className="form-input input-lg" name="email" type="email" id="signup-email" value={signupFormState.email} placeholder="Email" onChange={handleSignupFormChange}></input>
+                        <label className="form-label" htmlFor="password">Password:</label>
+                        <input className="form-input input-lg" name="password" type="password" id="signup-password" value={signupFormState.password} placeholder="Password" onChange={handleSignupFormChange}></input>
+                        <br />
+                        <button type="submit" className="btn btn-primary">Signup</button>
+                    </form>
                     <br />
-                    <button type="submit" className="btn btn-primary">Signup</button>
+                    {addUserStatus.error && <div>Signup failed. Please try again.</div>}
                 </div>
             </div>
         </div>

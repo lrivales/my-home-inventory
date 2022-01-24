@@ -12,15 +12,15 @@ db.once('open', async () => {
     };
 
     // create fake users
-    for (let user = 0; user < 5; user += 1) {
-        const username = faker.internet.userName();
-        const email = faker.internet.email(username);
-        const password = 'password';
+    // for (let user = 0; user < 5; user += 1) {
+    //     const username = faker.internet.userName();
+    //     const email = faker.internet.email(username);
+    //     const password = 'password';
 
-        const createdUser = await User.create({ username, email, password });
-        console.log(createdUser);
-    }
+    //     const createdUser = await User.create({ username, email, password });
+    //     console.log(createdUser);
+    // }
 
-    console.log('Database has been seeded.');
+    // console.log('Database has been seeded.');
     process.exit(0);
 });
