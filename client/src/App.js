@@ -3,9 +3,7 @@ import './App.css';
 import {
   ApolloClient,
   InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  gql
+  ApolloProvider
 } from '@apollo/client';
 
 import {
@@ -14,9 +12,9 @@ import {
 } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Items from './pages/Items';
 
 const client = new ApolloClient({
   uri: 'http://localhost:3001/graphql',
@@ -25,13 +23,13 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <ApolloProvider client={{client}}>
+    <ApolloProvider client={client}>
       <div className="App">
-        {/* <Hero /> */}
         <Navbar />
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='login' element={<Login />} />
+          <Route exact path='/home-inventory' element={<Home />} />
+          <Route exact path='/home-inventory/login' element={<Login />} />
+          <Route exact path='/home-inventory/items' element={<Items />} />
         </Routes>
       </div>
     </ApolloProvider>

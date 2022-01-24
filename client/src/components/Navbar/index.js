@@ -10,17 +10,11 @@ const Navbar = () => {
                 </section>
                 <section className="navbar-section">
                     <div className="input-group input-inline">
-                        <Link to='/' className='btn btn-link text-light'>Home</Link>
-                        <Link to="login" className="btn btn-link text-light">Login</Link>
-                        {/* <a href="/login" className="btn btn-link">Login</a>
-                        <a href='...' className='btn btn-link'>My Account</a>
-                        <a href="..." className="btn btn-link">My Items</a>
-                        <a href="..." className="btn btn-link">Logout</a> */}
+                        <Link to='/home-inventory' className='btn btn-link text-light'>Home</Link>
+                        <Link to="/home-inventory/login" className="btn btn-link text-light">Login</Link>
+                        <Link to="/home-inventory/items" className="btn btn-link text-light">Items</Link>
                     </div>
                 </section>
-                {/* <section className="navbar-section">
-                    // for spacing only
-                </section> */}
             </header>
         </div>
     )
