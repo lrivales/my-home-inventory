@@ -87,7 +87,7 @@ const Login = (props) => {
                             <label className="form-label" htmlFor="password">Password:</label>
                             <input className="form-input input-lg" name="password" type="password" id="login-password" value={loginFormState.password} placeholder="******" onChange={handleLoginFormChange}></input>
                             <br />
-                            <button type="submit" className="btn btn-primary">Login</button>
+                            <button type="submit" className="btn btn-lg bg-color-tertiary text-light">Login</button>
                         </form>
                         <br />
                         {loginStatus.error && <div>Login failed. Please try again.</div>}
@@ -105,7 +105,7 @@ const Login = (props) => {
                         <label className="form-label" htmlFor="password">Password:</label>
                         <input className="form-input input-lg" name="password" type="password" id="signup-password" value={signupFormState.password} placeholder="Password" onChange={handleSignupFormChange}></input>
                         <br />
-                        <button type="submit" className="btn btn-primary">Signup</button>
+                        <button type="submit" className="btn btn-lg bg-color-tertiary text-light">Signup</button>
                     </form>
                     <br />
                     {addUserStatus.error && <div>Signup failed. Please try again.</div>}
