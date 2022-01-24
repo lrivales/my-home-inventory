@@ -2,25 +2,25 @@ import React from "react";
 
 const Home = () => {
     return (
-        <div className="text-right pt-2">
-            <div>
+        <div>
+            <div className="bg-image-primary">
                 <div>
                     <br />
                     <br />
                     <br />
                     <br />
-                    <h1 className="text-title">Home Inventory&nbsp;</h1>
+                    <h1>Home Inventory&nbsp;</h1>
                 </div>
                 <h2>
                     <br />
                     <br />
-                    A simple way to manage your valuables&nbsp;
+                    A simple way to keep track
                     <br />
                     <br />
-                    to help you keep track of everything&nbsp;
+                    of your valuables
                     <br />
                     <br />
-                    in case the unthinkable happens.&nbsp;
+                    in case the unthinkable happens.
                     <br />
                     <br />
                 </h2>

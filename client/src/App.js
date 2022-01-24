@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 
 import {
@@ -9,9 +8,15 @@ import {
   gql
 } from '@apollo/client';
 
-import Hero from './components/Hero';
+import {
+  Routes,
+  Route
+} from 'react-router-dom';
+
 import Navbar from './components/Navbar';
+import Hero from './components/Hero';
 import Home from './pages/Home';
+import Login from './pages/Login';
 
 const client = new ApolloClient({
   uri: 'http://localhost:3001/graphql',
@@ -24,8 +29,11 @@ function App() {
       <div className="App">
         {/* <Hero /> */}
         <Navbar />
-        <Home />
-    </div>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='login' element={<Login />} />
+        </Routes>
+      </div>
     </ApolloProvider>
   );
 }
