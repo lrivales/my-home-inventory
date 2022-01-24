@@ -17,12 +17,14 @@ const Login = () => {
                     {/* login form */}
                     <div className="form-group">
                         <h4>Log In</h4>
-                        <label className="form-label" for="email">Email:</label>
-                        <input className="form-input input-lg" type="text" id="login-email" placeholder="Email"></input>
-                        <label className="form-label" for="password">Password:</label>
-                        <input className="form-input input-lg" type="text" id="login-password" placeholder="Password"></input>
-                        <br />
-                        <button type="submit" className="btn btn-primary">Login</button>
+                        <form onSubmit={handleFormSubmit}>
+                            <label className="form-label" for="email">Email:</label>
+                            <input className="form-input input-lg" name="email" type="email" id="login-email" value={formstate.email} placeholder="Email" onChange={handleChange}></input>
+                            <label className="form-label" for="password">Password:</label>
+                            <input className="form-input input-lg" name="password" type="password" id="login-password" value={formstate.password} placeholder="Password" onChange={handleChange}></input>
+                            <br />
+                            <button type="submit" className="btn btn-primary">Login</button>
+                        </form>
                     </div>
                 </div>
                 <div className="divider-vert" data-content="OR"></div>
