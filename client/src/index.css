@@ -55,7 +55,7 @@
   background-image: url('./assets/images/furniture.jpg');
   background-size: cover;
   position: absolute;
-  top: 35px;
+  top: 8%;
   right: 0px;
   bottom: 0px;
   left: 0px;
@@ -67,7 +67,7 @@
   background-image: url('./assets/images/modern-home.jpg');
   background-size: cover;
   position: absolute;
-  top: 0px;
+  top: 8%;
   right: 0px;
   bottom: 0px;
   left: 0px;

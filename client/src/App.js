@@ -3,8 +3,11 @@ import './App.css';
 import {
   ApolloClient,
   InMemoryCache,
-  ApolloProvider
+  ApolloProvider,
+  createHttpLink
 } from '@apollo/client';
+
+import { setContext } from '@apollo/client/link/context';
 
 import {
   Routes,
@@ -16,8 +19,22 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Items from './pages/Items';
 
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+const httpLink = createHttpLink({
+  uri: "/graphql",
+});
+
 const client = new ApolloClient({
-  uri: 'http://localhost:3001/graphql',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache()
 });
 

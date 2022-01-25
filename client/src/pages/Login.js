@@ -27,8 +27,6 @@ const Login = (props) => {
             const { data } = await login({
               variables: { ...loginFormState },
             });
-      
-            console.log(data);
 
             Auth.login(data.login.token);
           } catch (err) {
@@ -69,11 +67,7 @@ const Login = (props) => {
         <div>
             <br />
             <br />
-            <br />
-            <br />
             <h1>Please log in or sign up to continue.</h1>
-            <br />
-            <br />
             <br />
             <br />
             <div className="columns form-padding">
@@ -83,9 +77,26 @@ const Login = (props) => {
                         <h4>Log In</h4>
                         <form onSubmit={handleLoginFormSubmit}>
                             <label className="form-label" htmlFor="email">Email:</label>
-                            <input className="form-input input-lg" name="email" type="email" id="login-email" value={loginFormState.email} placeholder="Email" onChange={handleLoginFormChange}></input>
+                            <input 
+                                className="form-input input-lg" 
+                                name="email" 
+                                type="email" 
+                                id="login-email" 
+                                placeholder="Email" 
+                                value={loginFormState.email} 
+                                onChange={handleLoginFormChange}
+                            />
                             <label className="form-label" htmlFor="password">Password:</label>
-                            <input className="form-input input-lg" name="password" type="password" id="login-password" value={loginFormState.password} placeholder="******" onChange={handleLoginFormChange}></input>
+                            <input 
+                                className="form-input input-lg" 
+                                name="password" 
+                                type="password" 
+                                autoComplete="on"
+                                id="login-password" 
+                                placeholder="******" 
+                                value={loginFormState.password} 
+                                onChange={handleLoginFormChange}
+                            />
                             <br />
                             <button type="submit" className="btn btn-lg bg-color-tertiary text-light">Login</button>
                         </form>
@@ -99,11 +110,36 @@ const Login = (props) => {
                     <h4>Sign Up</h4>
                     <form onSubmit={handleSignupFormSubmit}>
                         <label className="form-label" htmlFor="email">Username:</label>
-                        <input className="form-input input-lg" name="username" type="username" id="signup-username" value={signupFormState.username} placeholder="Username" onChange={handleSignupFormChange}></input>
+                        <input 
+                            className="form-input input-lg" 
+                            name="username" 
+                            type="text" 
+                            id="signup-username" 
+                            placeholder="Username" 
+                            value={signupFormState.username} 
+                            onChange={handleSignupFormChange}
+                        />
                         <label className="form-label" htmlFor="email">Email:</label>
-                        <input className="form-input input-lg" name="email" type="email" id="signup-email" value={signupFormState.email} placeholder="Email" onChange={handleSignupFormChange}></input>
+                        <input 
+                            className="form-input input-lg" 
+                            name="email" 
+                            type="email" 
+                            id="signup-email" 
+                            placeholder="Email" 
+                            value={signupFormState.email} 
+                            onChange={handleSignupFormChange}
+                        />
                         <label className="form-label" htmlFor="password">Password:</label>
-                        <input className="form-input input-lg" name="password" type="password" id="signup-password" value={signupFormState.password} placeholder="Password" onChange={handleSignupFormChange}></input>
+                        <input 
+                            className="form-input input-lg" 
+                            name="password" 
+                            type="password" 
+                            autoComplete="on"
+                            id="signup-password" 
+                            value={signupFormState.password} 
+                            placeholder="Password" 
+                            onChange={handleSignupFormChange}
+                        />
                         <br />
                         <button type="submit" className="btn btn-lg bg-color-tertiary text-light">Signup</button>
                     </form>
