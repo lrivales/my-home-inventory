@@ -137,9 +137,6 @@ const Items = (props) => {
                             {addItemStatus.error && <div>Adding your item failed. Please try again.</div>}
                         </div>
                     </div>
-                    {/* <div className="modal-footer">
-                    ...
-                    </div> */}
                 </div>
             </div>
             <br />

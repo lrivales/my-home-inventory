@@ -25,12 +25,7 @@ const Item = ({ items }) => {
                                 <div className="card-subtitle text-gray">{item.description}</div>
                                 <div className="card-subtitle text-gray">${item.value}</div>
                             </div>
-                            {/* <div className="card-body">
-                                ...
-                            </div> */}
                             <div className="card-footer">
-                                {/* <button className="bg-color-tertiary"><i className="icon icon-edit text-light"></i></button>
-                                &nbsp;&nbsp;&nbsp;&nbsp; */}
                                 <button className="bg-color-tertiary"><i className="icon icon-delete text-light"></i></button>
                             </div>
                         </div>

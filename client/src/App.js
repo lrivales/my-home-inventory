@@ -44,6 +44,7 @@ function App() {
       <div className="App">
         <Navbar />
         <Routes>
+          <Route index element={<Home />} />
           <Route exact path='/home-inventory' element={<Home />} />
           <Route exact path='/home-inventory/login' element={<Login />} />
           <Route exact path='/home-inventory/items' element={<Items />} />
