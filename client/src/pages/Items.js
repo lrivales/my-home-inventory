@@ -1,10 +1,15 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
 
+import Auth from '../utils/auth';
+
 import { ADD_ITEM } from "../utils/mutations";
-import Auth from "../utils/auth";
+import { QUERY_ME } from "../utils/queries";
+
+import Item from "../components/Item";
 
 const Items = (props) => {
+    // toggle modal on or off
     const [modalState, setModalState] = useState('modal');
 
     const activateModal = async (event) => {
@@ -17,8 +22,13 @@ const Items = (props) => {
         setModalState('modal');
     };
 
+    // controller for adding new item
     const [addItemFormState, setAddItemFormState] = useState({ name: '', description: '', value: ''});
-    const [addItem, addItemStatus] = useMutation(ADD_ITEM); //add code to update cache
+    const [addItem, addItemStatus] = useMutation(ADD_ITEM, {
+        refetchQueries: [
+            QUERY_ME
+        ]
+    });
 
     const handleAddItemFormChange = (event) => {        
         const { name, value, type } = event.target;
@@ -41,10 +51,31 @@ const Items = (props) => {
                     content: addItemFormState
                 }
             });
+
+            setModalState('modal');
+            setAddItemFormState({ name: '', description: '', value: ''});
         } catch (err) {
             console.error(err);
         }
     };
+
+    // controller for query_me
+    const { loading, data } = useQuery(QUERY_ME);
+    const user = data?.me || {};
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (!user?.username) {
+        return (
+            <div>
+                <br />
+                <br />
+                <h4>Please log in or sign up to continue.</h4>
+            </div>
+        );
+    }
 
     return (
         <div>
@@ -113,30 +144,7 @@ const Items = (props) => {
             </div>
             <br />
             {/* item list card */}
-            <div className="container">
-                <div className="column">
-                    <div className="col-3">
-                        <div className="card">
-                            {/* <div className="card-image">
-                                <img src="..." className="img-responsive" />
-                            </div> */}
-                            <div className="card-header">
-                                <div className="card-title h5">2018 Gibson Les Paul Traditional</div>
-                                <div className="card-subtitle text-gray">Musical Instrument</div>
-                                <div className="card-subtitle text-gray"> $2850</div>
-                            </div>
-                            {/* <div className="card-body">
-                                ...
-                            </div> */}
-                            <div className="card-footer">
-                                <button className="bg-color-tertiary"><i className="icon icon-edit text-light"></i></button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                <button className="bg-color-tertiary"><i className="icon icon-delete text-light"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Item items={user.items}/>
         </div>
     )
 }
