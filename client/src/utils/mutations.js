@@ -8,12 +8,6 @@ mutation Login($email: String!, $password: String!) {
             _id
             username
             email
-            items {
-                _id
-                name
-                description
-                value
-            }
         }
     }
 }
@@ -27,12 +21,6 @@ mutation AddUser($username: String!, $email: String!, $password: String!) {
             _id
             username
             email
-            items {
-                _id
-                name
-                description
-                value
-            }
         }
     }
 }
@@ -66,6 +54,7 @@ mutation AddItem($userId: ID!, $content: itemData!) {
             name
             description
             value
+            image
         }
     }
 }
@@ -79,6 +68,7 @@ mutation UpdateItem($userId: ID!, $itemId: ID!, $content: itemData!) {
             name
             description
             value
+            image
         }
     }
 }
@@ -92,6 +82,7 @@ mutation DeleteItem($userId: ID!, $itemId: ID!) {
             name
             description
             value
+            image
         }
     }
 }

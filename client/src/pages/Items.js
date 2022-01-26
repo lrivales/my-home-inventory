@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
+import {Convert} from 'mongo-image-converter';
 
 import Auth from '../utils/auth';
 
@@ -23,19 +24,51 @@ const Items = (props) => {
     };
 
     // controller for adding new item
-    const [addItemFormState, setAddItemFormState] = useState({ name: '', description: '', value: ''});
+    const [itemName, setItemName] = useState('');
+    const [itemDescription, setItemDescription] = useState('');
+    const [itemValue, setItemValue] = useState('');
+    const [itemImage, setItemImage] = useState('');
+
+    const handleItemNameFormChange = (event) => {
+        setItemName(event.target.value);
+    };
+
+    const handleItemDescriptionFormChange = (event) => {
+        setItemDescription(event.target.value);
+    };
+
+    const handleItemValueFormChange = (event) => {
+        setItemValue(parseInt(event.target.value, 10));
+    };
+
+    const handleItemImageFormChange = async (event) => {
+        let imageFile = event.target.files[0];
+        try {
+            const convertedImage = await Convert(imageFile)
+            if (convertedImage) {
+                setItemImage(convertedImage);
+            } else {
+                console.log('The file is not in format of image/jpeg or image/png')
+            }
+        } catch (err) {
+            console.warn(err);
+        }
+    };
+
+    // const [addItemFormState, setAddItemFormState] = useState({ name: '', description: '', value: '', image: ''});
+
     const [addItem, addItemStatus] = useMutation(ADD_ITEM, {
         refetchQueries: [QUERY_ME]
     });
 
-    const handleAddItemFormChange = (event) => {        
-        const { name, value, type } = event.target;
+    // const handleAddItemFormChange = (event) => {        
+    //     const { name, value, type } = event.target;
 
-        setAddItemFormState({
-            ...addItemFormState,
-            [name]: type === 'number' ? parseInt(value, 10) : value
-        });
-    };
+    //     setAddItemFormState({
+    //         ...addItemFormState,
+    //         [name]: type === 'number' ? parseInt(value, 10) : value
+    //     });
+    // };
 
     const handleAddItemFormSubmit = async (event) => {
         event.preventDefault();
@@ -43,18 +76,40 @@ const Items = (props) => {
         const user = await Auth.getProfile();
 
         try {
-            const { data } = await addItem({
+            await addItem({
                 variables: {
                     userId: user.data._id,
-                    content: addItemFormState
+                    content: {
+                        name: itemName,
+                        description: itemDescription,
+                        value: itemValue,
+                        image: itemImage
+                    }
                 }
             });
 
             setModalState('modal');
-            setAddItemFormState({ name: '', description: '', value: ''});
+            setItemName('');
+            setItemDescription('');
+            setItemValue('');
+            setItemImage('');
         } catch (err) {
             console.error(err);
         }
+
+        // try {
+        //     const { data } = await addItem({
+        //         variables: {
+        //             userId: user.data._id,
+        //             content: addItemFormState
+        //         }
+        //     });
+
+        //     setModalState('modal');
+        //     setAddItemFormState({ name: '', description: '', value: ''});
+        // } catch (err) {
+        //     console.error(err);
+        // }
     };
 
     // controller for query_me
@@ -105,8 +160,10 @@ const Items = (props) => {
                                         type="text" 
                                         id="addItem-name" 
                                         placeholder="Name" 
-                                        value={addItemFormState.name} 
-                                        onChange={handleAddItemFormChange}
+                                        // value={addItemFormState.name} 
+                                        // onChange={handleAddItemFormChange}
+                                        // value={itemName}
+                                        onChange={handleItemNameFormChange}
                                     />
                                     <label className="form-label" htmlFor="description">Description</label>
                                     <input 
@@ -115,8 +172,10 @@ const Items = (props) => {
                                         type="text" 
                                         id="addItem-description" 
                                         placeholder="Description" 
-                                        value={addItemFormState.description} 
-                                        onChange={handleAddItemFormChange}
+                                        // value={addItemFormState.description} 
+                                        // onChange={handleAddItemFormChange}
+                                        // value={itemDescription}
+                                        onChange={handleItemDescriptionFormChange}
                                     />
                                     <label className="form-label" htmlFor="value">Value</label>
                                     <input 
@@ -125,8 +184,19 @@ const Items = (props) => {
                                         type="number" 
                                         id="addItem-value" 
                                         placeholder="value" 
-                                        value={addItemFormState.value} 
-                                        onChange={handleAddItemFormChange}
+                                        // value={addItemFormState.value} 
+                                        // onChange={handleAddItemFormChange}
+                                        // value={itemValue}
+                                        onChange={handleItemValueFormChange}
+                                    />
+                                    <label className="form-label" htmlFor="image">Image</label>
+                                    <input
+                                        className="form-input input-lg"
+                                        name="image"
+                                        type="file"
+                                        id="addItem-image"
+                                        accept="image/png, image/jpeg"
+                                        onInput={handleItemImageFormChange}
                                     />
                                     <br />
                                     <button type="submit" className="btn btn-lg bg-color-tertiary text-light">Submit</button>

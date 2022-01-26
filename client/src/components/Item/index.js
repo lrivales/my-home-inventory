@@ -23,7 +23,6 @@ const Item = ({ items }) => {
 
     const handleDeleteButton = async (event) => {
         event.preventDefault();
-        console.log(event.target.id)
         
         const user = await Auth.getProfile();
         
@@ -48,16 +47,16 @@ const Item = ({ items }) => {
                     <div className="column col-3" key={item._id}>
                         <form>
                             <div className="card">
-                                {/* <div className="card-image">
-                                    <img src="..." className="img-responsive" />
-                                </div> */}
+                                <div className="card-image">
+                                    <img src={item.image} className="img-responsive" />
+                                </div>
                                 <div className="card-header">
                                     <div className="card-title h5">{item.name}</div>
                                     <div className="card-subtitle text-gray">{item.description}</div>
                                     <div className="card-subtitle text-gray">${item.value}</div>
                                 </div>
                                 <div className="card-footer">
-                                    <button className="bg-color-tertiary">
+                                    <button className="btn btn-error">
                                         <i 
                                             className="icon icon-delete text-light" 
                                             id={item._id} 

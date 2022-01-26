@@ -11,6 +11,7 @@ query Me {
             name
             description
             value
+            image
         }
     }
 }
@@ -23,6 +24,7 @@ query Item($userId: ID!, $itemId: ID!) {
         name
         description
         value
+        image
     }
 }
 `;
