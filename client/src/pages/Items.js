@@ -25,9 +25,7 @@ const Items = (props) => {
     // controller for adding new item
     const [addItemFormState, setAddItemFormState] = useState({ name: '', description: '', value: ''});
     const [addItem, addItemStatus] = useMutation(ADD_ITEM, {
-        refetchQueries: [
-            QUERY_ME
-        ]
+        refetchQueries: [QUERY_ME]
     });
 
     const handleAddItemFormChange = (event) => {        
