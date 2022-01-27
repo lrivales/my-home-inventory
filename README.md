@@ -1,2 +1,36 @@
-# My Home Inventory
-This is a basic inventory app to keep track of all your belongings for insurance purposes.  
+# Home Inventory
+I created this app out of experience.  Years ago when I bought my first brand new house, I started moving in some new items into the house a week of move-in day.  The houses next to mine were still being built so I did not have neightbors yet.
+
+When I arrived at the house on move-in day, all my new items were stolen.  Somebody broke in and took everything.
+
+Fortunately, I still had all my receipts since they were recently purchased so the insurance covered all my losses.
+
+But what if I didn't have a record of it?  What if old items were stolen and I didn't even have pictures of them?  The insurance company can easily decline your claim?
+
+Enter Home Inventory...
+
+This is a basic home inventory app to keep track of all the valuables in your home in case something like this happens to you.
+
+It is built using React JS in the front-end with Express, Node JS and MongoDB in the back-end.
+
+It is so simple that anybody can use it.
+
+## Usage
+- Users are required to signup/login to use the application.
+- Click "Add an Item" to open the form to add an item.
+- Enter the name, description, and value of the item.
+- Choose a JPEG or PNG file to upload a photo of the item.
+- After clicking submit, a new card will be added to the Items page.
+- Click on the card's trash icon to delete an item.
+- Click on "Download List" to export an XLS file of all items (photos excluded).
+
+## Links
+- Heroku:
+- Github:
+
+## Screenshots
+![Home](assets/screenshots/home.png)
+![Login](assets/screenshots/login.png)
+![Items](assets/screenshots/items.png)
+![Add-Item](assets/screenshots/add-item.png)
+![Download](assets/screenshots/spreadsheet.png)
