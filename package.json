@@ -2,7 +2,7 @@
   "name": "my-home-inventory",
   "version": "1.0.0",
   "description": "I created this app out of experience.  Years ago when I bought my first brand new house, I started moving in some new items into the house a week of move-in day.  The houses next to mine were still being built so I did not have neightbors yet.",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
     "build": "cd client && npm run build",
