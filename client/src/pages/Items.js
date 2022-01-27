@@ -78,9 +78,6 @@ const Items = (props) => {
             });
 
             setModalState('modal');
-            setItemName('');
-            setItemDescription('');
-            setItemValue('');
             document.getElementById('addItemForm').reset();
         } catch (err) {
             console.error(err);
@@ -135,7 +132,6 @@ const Items = (props) => {
                                         type="text" 
                                         id="addItem-name" 
                                         placeholder="Name" 
-                                        value={itemName}
                                         onChange={handleItemNameFormChange}
                                     />
                                     <label className="form-label" htmlFor="description">Description</label>
@@ -145,7 +141,6 @@ const Items = (props) => {
                                         type="text" 
                                         id="addItem-description" 
                                         placeholder="Description" 
-                                        value={itemDescription}
                                         onChange={handleItemDescriptionFormChange}
                                     />
                                     <label className="form-label" htmlFor="value">Value</label>
@@ -155,7 +150,6 @@ const Items = (props) => {
                                         type="number" 
                                         id="addItem-value" 
                                         placeholder="value" 
-                                        value={itemValue}
                                         onChange={handleItemValueFormChange}
                                     />
                                     <label className="form-label" htmlFor="image">Image</label>
