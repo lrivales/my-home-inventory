@@ -22,7 +22,8 @@
     "graphql": "^16.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongo-image-converter": "^1.0.2",
-    "mongoose": "^6.1.7"
+    "mongoose": "^6.1.7",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
