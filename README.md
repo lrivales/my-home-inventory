@@ -1,19 +1,19 @@
 # Home Inventory
-I created this app out of experience.  Years ago when I bought my first brand new house, I started moving in some new items into the house a week of move-in day.  The houses next to mine were still being built so I did not have neightbors yet.
+I created this app out of experience.  Years ago when I bought my first brand new house, I started moving in some new items a week before my move-in day.  The houses next to mine were still being built so I did not have neighbors yet.
 
-When I arrived at the house on move-in day, all my new items were stolen.  Somebody broke in and took everything.
+When I arrived at the house the following weekend, all my new items were stolen.  Somebody broke in and took everything.
 
-Fortunately, I still had all my receipts since they were recently purchased so the insurance covered all my losses.
+Fortunately, I still had all my receipts since the stolen items were recently purchased.  The insurance covered all my losses.
 
-But what if I didn't have a record of it?  What if old items were stolen and I didn't even have pictures of them?  The insurance company can easily decline your claim?
+But what if I didn't have any record of them?  What if old items were stolen and I didn't even have pictures or old receipts?  The insurance company can easily reject your claim!
 
 Enter Home Inventory...
 
 This is a basic home inventory app to keep track of all the valuables in your home in case something like this happens to you.
 
-It is built using React JS in the front-end with Express, Node JS and MongoDB in the back-end.
-
 It is so simple that anybody can use it.
+
+It is built using React JS in the front-end with Express, Node JS and MongoDB in the back-end.
 
 ## Usage
 - Users are required to signup/login to use the application.
