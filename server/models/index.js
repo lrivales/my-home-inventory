@@ -45,8 +45,11 @@ const UserSchema = new Schema(
 
 // encrypt password before saving new user
 UserSchema.pre('save', async function(next) {
-    const saltRounds = 10;
-    this.password = await bcrypt.hash(this.password, saltRounds);
+    const user = await User.findById(this._id);
+    if (!user) {
+        const saltRounds = 10;
+        this.password = await bcrypt.hash(this.password, saltRounds);
+    }
 
     next();
 });
