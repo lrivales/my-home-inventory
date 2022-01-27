@@ -48,27 +48,16 @@ const Items = (props) => {
             if (convertedImage) {
                 setItemImage(convertedImage);
             } else {
-                console.log('The file is not in format of image/jpeg or image/png')
+                window.alert('The file is not in format of image/jpeg or image/png');
             }
         } catch (err) {
             console.warn(err);
         }
     };
 
-    // const [addItemFormState, setAddItemFormState] = useState({ name: '', description: '', value: '', image: ''});
-
     const [addItem, addItemStatus] = useMutation(ADD_ITEM, {
         refetchQueries: [QUERY_ME]
     });
-
-    // const handleAddItemFormChange = (event) => {        
-    //     const { name, value, type } = event.target;
-
-    //     setAddItemFormState({
-    //         ...addItemFormState,
-    //         [name]: type === 'number' ? parseInt(value, 10) : value
-    //     });
-    // };
 
     const handleAddItemFormSubmit = async (event) => {
         event.preventDefault();
@@ -92,24 +81,10 @@ const Items = (props) => {
             setItemName('');
             setItemDescription('');
             setItemValue('');
-            setItemImage('');
+            document.getElementById('addItemForm').reset();
         } catch (err) {
             console.error(err);
         }
-
-        // try {
-        //     const { data } = await addItem({
-        //         variables: {
-        //             userId: user.data._id,
-        //             content: addItemFormState
-        //         }
-        //     });
-
-        //     setModalState('modal');
-        //     setAddItemFormState({ name: '', description: '', value: ''});
-        // } catch (err) {
-        //     console.error(err);
-        // }
     };
 
     // controller for query_me
@@ -152,7 +127,7 @@ const Items = (props) => {
                         <div className="content">
                             {/* add new item form */}
                             <div className="form-group">
-                                <form onSubmit={handleAddItemFormSubmit}>
+                                <form id="addItemForm" onSubmit={handleAddItemFormSubmit}>
                                     <label className="form-label" htmlFor="name">Name</label>
                                     <input 
                                         className="form-input input-lg" 
@@ -160,9 +135,7 @@ const Items = (props) => {
                                         type="text" 
                                         id="addItem-name" 
                                         placeholder="Name" 
-                                        // value={addItemFormState.name} 
-                                        // onChange={handleAddItemFormChange}
-                                        // value={itemName}
+                                        value={itemName}
                                         onChange={handleItemNameFormChange}
                                     />
                                     <label className="form-label" htmlFor="description">Description</label>
@@ -172,9 +145,7 @@ const Items = (props) => {
                                         type="text" 
                                         id="addItem-description" 
                                         placeholder="Description" 
-                                        // value={addItemFormState.description} 
-                                        // onChange={handleAddItemFormChange}
-                                        // value={itemDescription}
+                                        value={itemDescription}
                                         onChange={handleItemDescriptionFormChange}
                                     />
                                     <label className="form-label" htmlFor="value">Value</label>
@@ -184,9 +155,7 @@ const Items = (props) => {
                                         type="number" 
                                         id="addItem-value" 
                                         placeholder="value" 
-                                        // value={addItemFormState.value} 
-                                        // onChange={handleAddItemFormChange}
-                                        // value={itemValue}
+                                        value={itemValue}
                                         onChange={handleItemValueFormChange}
                                     />
                                     <label className="form-label" htmlFor="image">Image</label>

@@ -3,13 +3,10 @@ import React from "react";
 
 import Auth from "../../utils/auth";
 
-import { QUERY_ME } from "../../utils/queries";
 import { DELETE_ITEM } from "../../utils/mutations";
 
 const Item = ({ items }) => {
-    const [deleteItem, deleteItemStatus] = useMutation(DELETE_ITEM, {
-        refetchQueries: [QUERY_ME]
-    });
+    const [deleteItem, deleteItemStatus] = useMutation(DELETE_ITEM);
 
     if (items.length === 0) {
         return (
@@ -27,28 +24,32 @@ const Item = ({ items }) => {
         const user = await Auth.getProfile();
         
         try {
-            const { data } = await deleteItem({
+            await deleteItem({
                 variables: {
                     userId: user.data._id,
                     itemId: event.target.id
                 }
             });
-            
-            window.location.reload();
         } catch (err) {
             console.error(err);
+        }
+        
+        if (deleteItemStatus.error) {
+            window.alert(deleteItemStatus.error)
+        } else {
+            window.location.reload();
         }
     };
 
     return (
         <div className="container">
-            <div className="columns">
+            <div className="columns col-gapless">
                 {items.map(item => (
-                    <div className="column col-3" key={item._id}>
+                    <div className="column col-3 col-md-auto col-sm-auto col-xs-auto" key={item._id}>
                         <form>
                             <div className="card">
                                 <div className="card-image">
-                                    <img src={item.image} className="img-responsive" />
+                                    <img src={item.image} className="img-responsive" alt={item.name} />
                                 </div>
                                 <div className="card-header">
                                     <div className="card-title h5">{item.name}</div>
