@@ -8,6 +8,7 @@ import { ADD_ITEM } from "../utils/mutations";
 import { QUERY_ME } from "../utils/queries";
 
 import Item from "../components/Item";
+import Download from "../components/Download";
 
 const Items = (props) => {
     // toggle modal on or off
@@ -106,6 +107,8 @@ const Items = (props) => {
         <div>
             <br />
             <button className="btn btn-lg bg-color-tertiary text-light" onClick={activateModal}>Add an Item</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <Download items={user.items}/>
             <br />
             {/* add item modal */}
             <div className={modalState} id="addItem-id">
