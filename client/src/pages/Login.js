@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
+import { useNavigate } from 'react-router-dom';
 
 import { LOGIN_USER, ADD_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
+import Navbar from "../components/Navbar";
 
 const Login = (props) => {
+    const navigate = useNavigate();
     const [loginFormState, setLoginFormState] = useState({ email: '', password: ''});
     const [login, loginStatus] = useMutation(LOGIN_USER);
 
@@ -29,6 +32,8 @@ const Login = (props) => {
             });
 
             Auth.login(data.login.token);
+            navigate('/home-inventory/items');
+
           } catch (err) {
             console.error(err);
           }
@@ -64,6 +69,7 @@ const Login = (props) => {
 
     return (
         <div>
+            <Navbar />
             <br />
             <br />
             <h1>Please log in or sign up to continue.</h1>

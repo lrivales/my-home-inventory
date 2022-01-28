@@ -9,6 +9,7 @@ import { QUERY_ME } from "../utils/queries";
 
 import Item from "../components/Item";
 import Download from "../components/Download";
+import Navbar from "../components/Navbar";
 
 const Items = (props) => {
     // toggle modal on or off
@@ -105,6 +106,7 @@ const Items = (props) => {
 
     return (
         <div>
+            <Navbar />
             <br />
             <button className="btn btn-lg bg-color-tertiary text-light" onClick={activateModal}>Add an Item</button>
             &nbsp;&nbsp;&nbsp;&nbsp;
