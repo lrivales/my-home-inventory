@@ -20,7 +20,7 @@ const Navbar = () => {
                         {Auth.loggedIn() 
                             ? <>
                                 <Link to="/home-inventory/items" className="btn btn-link text-light">Items</Link>
-                                <a href='/home-inventory' className='btn btn-link text-light' onClick={logout}>Logout</a>
+                                <a href='/' className='btn btn-link text-light' onClick={logout}>Logout</a>
                             </>
                             : <>
                                 <Link to='/home-inventory' className='btn btn-link text-light'>Home</Link>
