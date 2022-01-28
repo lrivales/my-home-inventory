@@ -9,6 +9,8 @@
   "scripts": {
     "start": "node server/server.js",
     "build": "cd client && npm run build",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/lrivales/my-home-inventory/issues"
   },
-  "homepage": "https://github.com/lrivales/my-home-inventory#readme"
+  "homepage": "https://github.com/lrivales/my-home-inventory#readme",
+  "devDependencies": {
+    "concurrently": "^7.0.0"
+  }
 }
