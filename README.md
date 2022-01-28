@@ -25,8 +25,8 @@ It is built using React JS in the front-end with Express, Node JS and MongoDB in
 - Click on "Download List" to export an XLS file of all items (photos excluded).
 
 ## Links
-- Heroku:
-- Github:
+- Heroku: https://tranquil-springs-40871.herokuapp.com/home-inventory
+- Github: https://github.com/lrivales/my-home-inventory
 
 ## Screenshots
 ![Home](assets/screenshots/home.png)
