@@ -48,9 +48,11 @@ const Item = ({ items }) => {
                     <div className="column col-3 col-md-auto col-sm-auto col-xs-auto" key={item._id}>
                         <form>
                             <div className="card">
+                                {item.image &&
                                 <div className="card-image">
                                     <img src={item.image} className="img-responsive" alt={item.name} />
                                 </div>
+                                }
                                 <div className="card-header">
                                     <div className="card-title h5">{item.name}</div>
                                     <div className="card-subtitle text-gray">{item.description}</div>
